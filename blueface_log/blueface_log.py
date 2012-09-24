@@ -87,12 +87,12 @@ def GetBluefaceLogs(user, passwd, ac_code, duration=7):
   now_format = now.strftime("%d%b%Y")
   start_format = start.strftime("%d%b%Y")
   br = mechanize.Browser()
-  br.open("https://www.blueface.ie/customers/login.aspx")
+  br.open("https://customers.blueface.ie")
   br.select_form(nr=0)
   br["username"] = user
   br["password"] = passwd
   bface = br.submit()
-  call_log = ("https://www.blueface.ie/customers/callhistorycsv.csv"
+  call_log = ("https://customers.blueface.ie/callhistorycsv.csv"
               "?accountcode=%s&startdate=%s&enddate=%s" % (ac_code, 
                                                            start_format, 
                                                            now_format))
