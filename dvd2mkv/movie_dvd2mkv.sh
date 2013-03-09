@@ -29,10 +29,14 @@
 
 # author: Conall O'Brien (conall@conall.net)
 
-/Applications/HandBrakeCLI \
-  # Input path and options
-  -i $1 --main-feature \
-  # Enxocde and Passthrough 5.1 sorround
-  -e x264 -E copy:ac3 \
-  # Output file and options
-  -o ~/Movies/$2.mkv -m
+INPUT=$1
+OUTPUT=$2
+AUDIO_TRACK=${3:-1}
+AUDIO_CODEC=${4:-ac3}
+OUTPUT_DIR="/Users/Shared/DVDRips"
+
+# caffeinate (to add a power management assertion)
+/usr/bin/caffeinate /Applications/HandBrakeCLI \
+  --main-feature -i "${INPUT}" \
+  -e x264 -a ${AUDIO_TRACK} -E copy:${AUDIO_CODEC} \
+  -o "$OUTPUT_DIR/${OUTPUT}.mkv" -m
